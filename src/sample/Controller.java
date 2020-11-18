@@ -96,7 +96,7 @@ public class Controller {
 
     public void defaultSettings(){
 
-        // erdem özer
+        // Deneme kodu
 
         //Oyun ayarlari
         m = 20;
