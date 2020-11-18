@@ -54,8 +54,17 @@ public class Game {
         this.n = n;
         //Oyun Tahtasi
         this.gameBoard = new int [m][n];
-        this.board.getRowConstraints().add(new RowConstraints(m));
-        this.board.getColumnConstraints().add(new ColumnConstraints(n));
+        //RowConstraints rows = new RowConstraints();
+        //rows.setPercentHeight(m);
+        //ColumnConstraints cols = new ColumnConstraints();
+        //cols.setPercentWidth(n);
+        for (int i = 0;i<n-15;i++){
+            this.board.getRowConstraints().add(new RowConstraints(m));
+        }
+        for (int j=0;j<m-15;j++){
+
+            this.board.getColumnConstraints().add(new ColumnConstraints(n));
+        }
 
 
         this.goldPerc = goldPerc;
