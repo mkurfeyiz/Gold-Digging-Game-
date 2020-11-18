@@ -116,4 +116,8 @@ public class Game {
     public void goldSetter() {
         int points[] = {5, 10, 15, 20};
     }
+
+    public void erdem(){
+        
+    }
 }
