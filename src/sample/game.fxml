@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="610.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Game">
+<AnchorPane prefHeight="800.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Game">
     <children>
 
         <Label layoutX="20.0" layoutY="20.0" text="A Oyuncusu ">
@@ -132,11 +132,11 @@
                 <Font name="Gill Sans MT" size="16.0" />
             </font>
         </Label>
-      <GridPane fx:id="board" gridLinesVisible="true" layoutX="260.0" layoutY="85.0" prefHeight="400.0" prefWidth="400.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-      </GridPane>
+        <GridPane fx:id="board" gridLinesVisible="true" layoutX="260.0" layoutY="85.0" prefHeight="400.0" prefWidth="400.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+        </GridPane>
 
 
     </children>

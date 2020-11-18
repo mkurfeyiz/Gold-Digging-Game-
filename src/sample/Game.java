@@ -67,16 +67,17 @@ public class Game {
         this.n = n;
         //Oyun Tahtasi
         this.gameBoard = new int[m][n];
-        //RowConstraints rows = new RowConstraints();
-        //rows.setPercentHeight(m);
-        //ColumnConstraints cols = new ColumnConstraints();
-        //cols.setPercentWidth(n);
-        for (int i = 0; i < n - 15; i++) {
-            this.board.getRowConstraints().add(new RowConstraints(m));
-        }
-        for (int j = 0; j < m - 15; j++) {
+        /*RowConstraints rows = new RowConstraints();
+        ColumnConstraints cols = new ColumnConstraints();*/
 
-            this.board.getColumnConstraints().add(new ColumnConstraints(n));
+        for (int i = 0; i < m; i++) {
+            this.board.getRowConstraints().add(new RowConstraints(30));
+            //rows.setPercentHeight(50);
+        }
+        for (int j = 0; j < n; j++) {
+
+            this.board.getColumnConstraints().add(new ColumnConstraints(30));
+            //cols.setPercentWidth(50);
         }
 
 
