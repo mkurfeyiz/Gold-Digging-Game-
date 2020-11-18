@@ -95,6 +95,9 @@ public class Controller {
     }
 
     public void defaultSettings(){
+
+        // erdem özer
+
         //Oyun ayarlari
         m = 20;
         n = 20;
