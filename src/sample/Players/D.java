@@ -15,7 +15,7 @@ public class D extends Players{
         this.targetCost = targetCost;
 
         try {
-            this.logFile = new File("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logs.txt");
+            this.logFile = new File("src/sample/Logs/logs.txt");
             if (logFile.createNewFile()) {
                 System.out.println(logFile.getName() + " dosyası oluşturuldu.");
             }
@@ -44,7 +44,7 @@ public class D extends Players{
         //logD.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
         System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
         try {
-            writer = new FileWriter("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logs.txt",true);
+            writer = new FileWriter("src/sample/Logs/logs.txt",true);
             writer.write("\nD Oyuncusu\n\n");
             writer.write("Kalan Altın Miktarı : "+player.gold+" \nHarcanan Toplam Altın Miktarı :"+player.goldSpent
                     +" \nToplam Atılan Adım Sayısı : "+player.stepsCount);
