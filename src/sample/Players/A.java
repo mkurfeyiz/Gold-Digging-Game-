@@ -41,6 +41,7 @@ public class A extends Players{
     @Override
     public void log(Players player) {
         //logA.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
+        System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
         try {
             writer = new FileWriter("src/sample/Logs/logs.txt",true);
             writer.write("\nA Oyuncusu\n\n");
