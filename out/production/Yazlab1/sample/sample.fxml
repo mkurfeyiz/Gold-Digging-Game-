@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label layoutX="316.0" layoutY="14.0" text="ALTIN TOPLAMA">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="200.0" layoutY="533.0" mnemonicParsing="false" onAction="#defaultSettings" prefHeight="45.0" prefWidth="230.0" text="VARSAYILAN AYARLARI KULLAN" textAlignment="CENTER">
+         <font>
+            <Font name="Gill Sans MT" size="14.0" />
+         </font>
+      </Button>
+
+      <Button layoutX="10.0" layoutY="533.0" mnemonicParsing="false" onAction="#setNewSettings" prefHeight="45.0" prefWidth="180.0" text="DEĞİŞİKLİKLERİ KAYDET" textAlignment="CENTER">
+         <font>
+            <Font name="Gill Sans MT" size="14.0" />
+         </font>
+      </Button>
+
+      <Button layoutX="810.0" layoutY="533.0" mnemonicParsing="false" onAction="#startGame" prefHeight="45.0" prefWidth="130.0" text="OYUNA BAŞLA" textAlignment="CENTER">
+         <font>
+            <Font name="Gill Sans MT" size="14.0" />
+         </font>
+      </Button>
+
+      <Label layoutX="10.0" layoutY="100.0" text="Tahta Boyutu (MxN) :">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="matrixM" layoutX="250.0" layoutY="105.0" prefHeight="22.0" prefWidth="85.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <TextField fx:id="matrixN" layoutX="345.0" layoutY="105.0" prefHeight="22.0" prefWidth="85.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="10.0" layoutY="160.0" text="Kare Başına Altın Oranı :">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="goldPercentage" layoutX="280.0" layoutY="165.0">
+      <font>
+         <Font name="Gill Sans MT" size="12.0" />
+      </font></TextField>
+
+      <Label layoutX="10.0" layoutY="220.0" text="Başlangıç Altın Miktarı :">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="goldAmount" layoutX="260.0" layoutY="225.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+
+      <Label layoutX="10.0" layoutY="280.0" text="Tek Hamlede Atılan Adım Sayısı :">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="stepsPerMovement" layoutX="350.0" layoutY="285.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+
+      <Label layoutX="650.0" layoutY="100.0" text="A Oyuncusunun ">
+         <font>
+            <Font name="Gill Sans MT Bold" size="24.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="650.0" layoutY="160.0" text="Hamle Başı Altın Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="moveCostA" layoutX="870.0" layoutY="163.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="650.0" layoutY="220.0" text="Hedef Belirleme Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="targetCostA" layoutX="870.0" layoutY="223.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="10.0" layoutY="340.0" text="B Oyuncusunun ">
+         <font>
+            <Font name="Gill Sans MT Bold" size="24.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="10.0" layoutY="400.0" text="Hamle Başı Altın Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="moveCostB" layoutX="230.0" layoutY="403.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="10.0" layoutY="460.0" text="Hedef Belirleme Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="targetCostB" layoutX="230.0" layoutY="463.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+
+      <Label layoutX="330.0" layoutY="340.0" text="C Oyuncusunun ">
+         <font>
+            <Font name="Gill Sans MT Bold" size="24.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="330.0" layoutY="400.0" text="Hamle Başı Altın Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="moveCostC" layoutX="550.0" layoutY="403.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="330.0" layoutY="460.0" text="Hedef Belirleme Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="targetCostC" layoutX="550.0" layoutY="463.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+
+      <Label layoutX="650.0" layoutY="340.0" text="D Oyuncusunun ">
+         <font>
+            <Font name="Gill Sans MT Bold" size="24.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="650.0" layoutY="400.0" text="Hamle Başı Altın Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="moveCostD" layoutX="870.0" layoutY="403.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+      <Label layoutX="650.0" layoutY="460.0" text="Hedef Belirleme Maliyeti :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+
+      <TextField fx:id="targetCostD" layoutX="870.0" layoutY="463.0" prefHeight="22.0" prefWidth="59.0">
+         <font>
+            <Font name="Gill Sans MT" size="12.0" />
+         </font></TextField>
+
+
+
+   </children>
+</AnchorPane>

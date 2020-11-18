@@ -1,0 +1,5 @@
+----
+Kalan Altın Miktarı : 200 
+Harcanan Toplam Altın Miktarı :0 
+Toplam Atılan Adım Sayısı : 0
+----

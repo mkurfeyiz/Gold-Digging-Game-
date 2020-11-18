@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="610.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Game">
+    <children>
+
+        <Label layoutX="20.0" layoutY="20.0" text="A Oyuncusu ">
+            <font>
+                <Font name="Gill Sans MT Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="20.0" layoutY="45.0" text="Altın Miktarı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="goldA" layoutX="120.0" layoutY="45.0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+
+        <Label layoutX="20.0" layoutY="65.0" text="Toplam Adım Sayısı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="stepsA" layoutX="165.0" layoutY="65.0" text="0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+
+        <Label layoutX="765.0" layoutY="20.0" text="B Oyuncusu ">
+            <font>
+                <Font name="Gill Sans MT Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="765.0" layoutY="45.0" text="Altın Miktarı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="goldB" layoutX="865.0" layoutY="45.0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="765.0" layoutY="65.0" text="Toplam Adım Sayısı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="stepsB" layoutX="910.0" layoutY="65.0" text="0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+
+
+        <Label layoutX="20.0" layoutY="530.0" text="C Oyuncusu ">
+            <font>
+                <Font name="Gill Sans MT Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="20.0" layoutY="555.0" text="Altın Miktarı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="goldC" layoutX="120.0" layoutY="555.0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="20.0" layoutY="575.0" text="Toplam Adım Sayısı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="stepsC" layoutX="165.0" layoutY="575.0" text="0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+
+        <Label layoutX="765.0" layoutY="530.0" text="D Oyuncusu ">
+            <font>
+                <Font name="Gill Sans MT Bold" size="18.0" />
+            </font>
+        </Label>
+
+
+        <Label layoutX="765.0" layoutY="555.0" text="Altın Miktarı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="goldD" layoutX="865.0" layoutY="555.0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="765.0" layoutY="575.0" text="Toplam Adım Sayısı :">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="stepsD" layoutX="910.0" layoutY="575.0" text="0">
+            <font>
+                <Font name="Gill Sans MT" size="16.0" />
+            </font>
+        </Label>
+
+
+    </children>
+
+</AnchorPane>
