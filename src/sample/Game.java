@@ -2,6 +2,10 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 import sample.Players.*;
 
 public class Game {
@@ -19,8 +23,11 @@ public class Game {
     //D
     @FXML Label goldD;
     @FXML Label stepsD;
+    //Oyun Tahtasi
+    @FXML GridPane board;
 
     //Oyun ayarlarinin degerleri
+    int gameBoard[][];
     int m,n;
     int goldPerc;
     int gold;
@@ -45,6 +52,12 @@ public class Game {
         //Oyun degerleri
         this.m = m;
         this.n = n;
+        //Oyun Tahtasi
+        this.gameBoard = new int [m][n];
+        this.board.getRowConstraints().add(new RowConstraints(m));
+        this.board.getColumnConstraints().add(new ColumnConstraints(n));
+
+
         this.goldPerc = goldPerc;
         this.gold = gold;
         this.stepsSetting = stepsSetting;

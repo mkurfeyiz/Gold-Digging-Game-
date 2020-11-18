@@ -1,5 +1,6 @@
 package sample.Players;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class A extends Players{
         this.moveCost = moveCost;
         this.targetCost = targetCost;
         try {
-            this.logFile = new File("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logA.txt");
+            this.logFile = new File("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logs.txt");
             if (logFile.createNewFile()) {
                 System.out.println(logFile.getName() + " dosyası oluşturuldu.");
             }
@@ -40,23 +41,21 @@ public class A extends Players{
 
     @Override
     public void log(Players player) {
-        System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
         //logA.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
+        System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
         try {
-            writer = new FileWriter("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logA.txt");
-            writer.write("----\n");
+            writer = new FileWriter("C:\\Users\\asus1\\Desktop\\Courses\\Yazlab1\\src\\sample\\Logs\\logs.txt",true);
+            writer.write("\nA Oyuncusu\n\n");
             writer.write("Kalan Altın Miktarı : "+player.gold+" \nHarcanan Toplam Altın Miktarı :"+player.goldSpent
                     +" \nToplam Atılan Adım Sayısı : "+player.stepsCount);
             writer.write("\n----\n");
             writer.close();
+            System.out.println("Yazma işlemi tamamlandı!");
         }
         catch (Exception e) {
             System.out.println("Bir sorun meydana geldi.");
             e.printStackTrace();
         }
-
-
-        System.out.println("Yazma işlemi tamamlandı!");
 
     }
 

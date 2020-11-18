@@ -1,8 +1,7 @@
 package sample.Players;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
 
 public abstract class Players {
 

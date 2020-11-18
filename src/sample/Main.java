@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.Players.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -24,10 +25,16 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
         Players a = new A(2,2,3,200);
+        Players b = new B(2,2,3,300);
+        Players c = new C(2,2,3,400);
+        Players d = new D(2,2,3,500);
         try {
             a.log(a);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
