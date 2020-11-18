@@ -12,23 +12,32 @@ public class Game {
 
     //Oyuncu bilgileri
     //A
-    @FXML Label goldA;
-    @FXML Label stepsA;
+    @FXML
+    Label goldA;
+    @FXML
+    Label stepsA;
     //B
-    @FXML Label goldB;
-    @FXML Label stepsB;
+    @FXML
+    Label goldB;
+    @FXML
+    Label stepsB;
     //C
-    @FXML Label goldC;
-    @FXML Label stepsC;
+    @FXML
+    Label goldC;
+    @FXML
+    Label stepsC;
     //D
-    @FXML Label goldD;
-    @FXML Label stepsD;
+    @FXML
+    Label goldD;
+    @FXML
+    Label stepsD;
     //Oyun Tahtasi
-    @FXML GridPane board;
+    @FXML
+    GridPane board;
 
     //Oyun ayarlarinin degerleri
     int gameBoard[][];
-    int m,n;
+    int m, n;
     int goldPerc;
     int gold;
     int stepsSetting;
@@ -46,22 +55,26 @@ public class Game {
     int movementCostD;
     int targetingCostD;
 
+    // Golds
+    int randomGoldCounter;
+    int randomSecretGoldCounter;
 
-    public void getSettings(int m,int n,int goldPerc,int gold,int stepsSetting,int movementCostA,int targetingCostA
-            ,int movementCostB,int targetingCostB,int movementCostC,int targetingCostC,int movementCostD,int targetingCostD){
+
+    public void getSettings(int m, int n, int goldPerc, int gold, int stepsSetting, int movementCostA, int targetingCostA
+            , int movementCostB, int targetingCostB, int movementCostC, int targetingCostC, int movementCostD, int targetingCostD) {
         //Oyun degerleri
         this.m = m;
         this.n = n;
         //Oyun Tahtasi
-        this.gameBoard = new int [m][n];
+        this.gameBoard = new int[m][n];
         //RowConstraints rows = new RowConstraints();
         //rows.setPercentHeight(m);
         //ColumnConstraints cols = new ColumnConstraints();
         //cols.setPercentWidth(n);
-        for (int i = 0;i<n-15;i++){
+        for (int i = 0; i < n - 15; i++) {
             this.board.getRowConstraints().add(new RowConstraints(m));
         }
-        for (int j=0;j<m-15;j++){
+        for (int j = 0; j < m - 15; j++) {
 
             this.board.getColumnConstraints().add(new ColumnConstraints(n));
         }
@@ -91,5 +104,15 @@ public class Game {
         goldC.setText(Integer.toString(this.gold));
         goldD.setText(Integer.toString(this.gold));
 
+    }
+
+    public void goldCounter() {
+        randomGoldCounter = ((m * n) * 20) / 100;
+        randomSecretGoldCounter = (randomGoldCounter * 10) / 100;
+
+    }
+
+    public void goldSetter() {
+        int points[] = {5, 10, 15, 20};
     }
 }
