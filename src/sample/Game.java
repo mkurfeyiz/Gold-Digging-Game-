@@ -124,9 +124,9 @@ public class Game {
 
     }
 
-    public void setGameBoard(){
+    public void setGameBoard() {
         Random random = new Random();
-        int index1,index2,pointIndex,counter = 0;
+        int index1, index2, pointIndex, counter = 0;
 
         //Initializing first values for gameBoard
         for (int i = 0; i < m; i++) {
@@ -135,13 +135,13 @@ public class Game {
             }
         }
         //Initializing gold positions
-        while(counter<randomGoldCounter){
+        while (counter < randomGoldCounter) {
 
             //random position for golds
-            index1=random.nextInt(m);
-            index2=random.nextInt(n);
+            index1 = random.nextInt(m);
+            index2 = random.nextInt(n);
 
-            if(gameBoard[index1][index2] == 0){
+            if (gameBoard[index1][index2] == 0) {
                 //random value for golds
                 pointIndex = random.nextInt(4);
                 gameBoard[index1][index2] = points[pointIndex];
@@ -151,13 +151,13 @@ public class Game {
         }
         counter = 0;
         //Set the value of secret golds to 1
-        while(counter<randomSecretGoldCounter){
+        while (counter < randomSecretGoldCounter) {
 
             //random position for golds
-            index1=random.nextInt(m);
-            index2=random.nextInt(n);
+            index1 = random.nextInt(m);
+            index2 = random.nextInt(n);
 
-            if(gameBoard[index1][index2] != 0){
+            if (gameBoard[index1][index2] != 0) {
 
                 gameBoard[index1][index2] = 1;
                 counter++;
@@ -165,13 +165,30 @@ public class Game {
 
         }
 
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                System.out.print(gameBoard[i][j]+" ");
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(gameBoard[i][j] + " ");
             }
             System.out.println();
         }
     }
 
+    public void movementA() {
+
+        int startColumnA = 0;
+        int startRowA = 0;
+        int var;
+        int closestPoint[][];
+        int i = 0, j = 0;
+
+        for (i = 0; i < m; i++) {
+            for (j = 0; j < n; j++){
+                if(gameBoard[i][j] != 0){
+                    System.out.println("selam");
+                }
+            }
+
+        }
+    }   
 
 }

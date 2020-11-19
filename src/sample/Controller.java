@@ -124,7 +124,28 @@ public class Controller {
         alert.setContentText("Varsayılan ayarlar seçildi.");
         //System.out.println(gold + targetingCostD);
 
+        matrixM.setText(String.valueOf(m));
+        matrixN.setText(String.valueOf(n));
+
+        goldPercentage.setText(String.valueOf(goldPerc));
+        goldAmount.setText(String.valueOf(gold));
+
+        moveCostA.setText(String.valueOf(movementCostA));
+        targetCostA.setText(String.valueOf(targetingCostA));
+
+        moveCostB.setText(String.valueOf(movementCostB));
+        targetCostB.setText(String.valueOf(targetingCostB));
+
+        moveCostC.setText(String.valueOf(movementCostC));
+        targetCostC.setText(String.valueOf(targetingCostC));
+
+        moveCostD.setText(String.valueOf(movementCostD));
+        targetCostD.setText(String.valueOf(targetingCostD));
+
+        stepsPerMovement.setText((String.valueOf(stepsSetting)));
+
         alert.showAndWait();
+
 
     }
 
@@ -145,5 +166,6 @@ public class Controller {
         window.show();
 
     }
+
 
 }
