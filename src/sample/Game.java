@@ -1,13 +1,17 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import sample.Players.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
@@ -36,6 +40,8 @@ public class Game {
     //Oyun Tahtasi
     @FXML
     GridPane board;
+
+    ArrayList<Label> goldLabels;
 
     //Oyun ayarlarinin degerleri
     int gameBoard[][];
@@ -70,7 +76,7 @@ public class Game {
         this.n = n;
         //Oyun Tahtasi
         this.gameBoard = new int[m][n];
-
+        goldLabels = new ArrayList<>(m * n);
         goldCounter();
         setGameBoard();
         /*for(int i=0;i<m;i++){
@@ -126,7 +132,12 @@ public class Game {
 
     public void setGameBoard() {
         Random random = new Random();
-        int index1, index2, pointIndex, counter = 0;
+        int index1, index2, pointIndex, counter = 0, indexCount = 0;
+        //Creating labels to show matrix values on gridpane
+        for (int i = 0; i < m * n; i++) {
+
+            goldLabels.add(new Label("0"));
+        }
 
         //Initializing first values for gameBoard
         for (int i = 0; i < m; i++) {
@@ -134,6 +145,7 @@ public class Game {
                 gameBoard[i][j] = 0;
             }
         }
+
         //Initializing gold positions
         while (counter < randomGoldCounter) {
 
@@ -141,7 +153,8 @@ public class Game {
             index1 = random.nextInt(m);
             index2 = random.nextInt(n);
 
-            if (gameBoard[index1][index2] == 0) {
+            if (((index1 != 0 && index2 != 0) && (index1 != 0 && index2 != n) && (index1 != m && index2 != 0) && (index1 != m && index2 != n))
+            ) {
                 //random value for golds
                 pointIndex = random.nextInt(4);
                 gameBoard[index1][index2] = points[pointIndex];
@@ -157,7 +170,8 @@ public class Game {
             index1 = random.nextInt(m);
             index2 = random.nextInt(n);
 
-            if (gameBoard[index1][index2] != 0) {
+            if (((index1 != 0 && index2 != 0) && (index1 != 0 && index2 != n) && (index1 != m && index2 != 0) && (index1 != m && index2 != n))
+                    && gameBoard[index1][index2] != 0) {
 
                 gameBoard[index1][index2] = 1;
                 counter++;
@@ -165,12 +179,45 @@ public class Game {
 
         }
 
+
+        //Showing matrix values on gridpane
         for (int i = 0; i < m; i++) {
+
             for (int j = 0; j < n; j++) {
-                System.out.print(gameBoard[i][j] + " ");
+                if (gameBoard[i][j] == 1 || gameBoard[i][j] != 0) {
+                    goldLabels.get(indexCount).setText(Integer.toString(gameBoard[i][j]));
+                    board.add(goldLabels.get(indexCount), j, i);
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else if (((i == 0 && j == 0))) {
+                    goldLabels.get(indexCount).setText("A");
+                    board.add(goldLabels.get(indexCount), j, i);
+                    indexCount++;
+                } else if ((i == 0 && j == n - 1)) {
+                    goldLabels.get(indexCount).setText("B");
+                    board.add(goldLabels.get(indexCount), j, i);
+                    indexCount++;
+                } else if ((i == m - 1 && j == 0)) {
+                    goldLabels.get(indexCount).setText("C");
+                    board.add(goldLabels.get(indexCount), j, i);
+                    indexCount++;
+                } else if ((i == m - 1 && j == n - 1)) {
+                    goldLabels.get(indexCount).setText("D");
+                    board.add(goldLabels.get(indexCount), j, i);
+                    indexCount++;
+                } else {
+                    indexCount++;
+                }
+            }
+        }
+
+        /*for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(gameBoard[i][j]+" ");
             }
             System.out.println();
-        }
+        }*/
+
     }
 
     public void movementA() {
@@ -182,13 +229,12 @@ public class Game {
         int i = 0, j = 0;
 
         for (i = 0; i < m; i++) {
-            for (j = 0; j < n; j++){
-                if(gameBoard[i][j] != 0){
+            for (j = 0; j < n; j++) {
+                if (gameBoard[i][j] != 0) {
                     System.out.println("selam");
                 }
             }
 
         }
-    }   
-
+    }
 }
