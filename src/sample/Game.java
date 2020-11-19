@@ -8,6 +8,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import sample.Players.*;
 
+import java.util.Random;
+
 public class Game {
 
     //Oyuncu bilgileri
@@ -58,6 +60,7 @@ public class Game {
     // Golds
     int randomGoldCounter;
     int randomSecretGoldCounter;
+    int points[] = {5, 10, 15, 20};
 
 
     public void getSettings(int m, int n, int goldPerc, int gold, int stepsSetting, int movementCostA, int targetingCostA
@@ -67,17 +70,25 @@ public class Game {
         this.n = n;
         //Oyun Tahtasi
         this.gameBoard = new int[m][n];
-        /*RowConstraints rows = new RowConstraints();
-        ColumnConstraints cols = new ColumnConstraints();*/
+
+        goldCounter();
+        setGameBoard();
+        /*for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(gameBoard[i][j]+" ");
+            }
+            System.out.println();
+        }*/
 
         for (int i = 0; i < m; i++) {
+
             this.board.getRowConstraints().add(new RowConstraints(30));
-            //rows.setPercentHeight(50);
+
         }
         for (int j = 0; j < n; j++) {
 
             this.board.getColumnConstraints().add(new ColumnConstraints(30));
-            //cols.setPercentWidth(50);
+
         }
 
 
@@ -113,8 +124,54 @@ public class Game {
 
     }
 
-    public void goldSetter() {
-        int points[] = {5, 10, 15, 20};
+    public void setGameBoard(){
+        Random random = new Random();
+        int index1,index2,pointIndex,counter = 0;
+
+        //Initializing first values for gameBoard
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                gameBoard[i][j] = 0;
+            }
+        }
+        //Initializing gold positions
+        while(counter<randomGoldCounter){
+
+            //random position for golds
+            index1=random.nextInt(m);
+            index2=random.nextInt(n);
+
+            if(gameBoard[index1][index2] == 0){
+                //random value for golds
+                pointIndex = random.nextInt(4);
+                gameBoard[index1][index2] = points[pointIndex];
+                counter++;
+            }
+
+        }
+        counter = 0;
+        //Set the value of secret golds to 1
+        while(counter<randomSecretGoldCounter){
+
+            //random position for golds
+            index1=random.nextInt(m);
+            index2=random.nextInt(n);
+
+            if(gameBoard[index1][index2] != 0){
+
+                gameBoard[index1][index2] = 1;
+                counter++;
+            }
+
+        }
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                System.out.print(gameBoard[i][j]+" ");
+            }
+            System.out.println();
+        }
     }
-    
+
+
 }
