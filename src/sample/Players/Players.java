@@ -30,6 +30,14 @@ public abstract class Players {
         return distance;
     }
 
+    public int getIndexI(){
+        return this.indexI;
+    }
+
+    public int getIndexJ(){
+        return this.indexJ;
+    }
+
 }
 
 

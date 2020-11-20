@@ -36,23 +36,36 @@ public class B extends Players{
     public void selectTarget(int matrix[][],int targetCost,int playerI,int playerJ){
         //Search algorithm
         double tempDist = 1000;
+        double totalProfit = -1;
+        double tempProfit ;
         int tempI = 0,tempJ = 0;
-        int tempGold = 0;
+        int tempGold = 1;
         playerI = this.indexI;
         playerJ = this.indexJ;
 
         for (int i=0;i<matrixM;i++){
             for(int j=0;j<matrixN;j++){
                 if(matrix[i][j]!=1 && matrix[i][j]!=50 && calcDistance(playerI,playerJ,i,j) < tempDist){
+                    tempGold = matrix[i][j];
                     tempDist = calcDistance(playerI,playerJ,i,j);
-                    tempI = i;
-                    tempJ = j;
+                    tempProfit = (tempGold-(Math.ceil(tempDist/this.steps))*this.moveCost-this.targetCost);
+                    if(tempProfit > totalProfit){
+                        totalProfit = tempProfit;
+                        tempI = i;
+                        tempJ = j;
+                    } else {
+                        tempGold = 1;
+                        tempDist = 1000;
+                        totalProfit = -1;
+                    }
+                    System.out.println("B oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
                 }
             }
         }
 
-
-        System.out.println("B oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
+        System.out.println("\nB oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
+        System.out.println("Uzaklık : "+Math.ceil(tempDist/this.steps));
+        System.out.println("Kazanç : "+totalProfit);
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;

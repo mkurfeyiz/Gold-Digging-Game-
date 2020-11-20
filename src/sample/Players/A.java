@@ -33,14 +33,6 @@ public class A extends Players{
 
     }
 
-    public int getIndexI(){
-        return this.indexI;
-    }
-
-    public int getIndexJ(){
-        return this.indexJ;
-    }
-
     //En yakindaki altini hedefler
     @Override
     public void selectTarget(int matrix[][],int targetCost,int playerI,int playerJ){
