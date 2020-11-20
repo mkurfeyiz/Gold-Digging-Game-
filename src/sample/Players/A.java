@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 //Path
 //C:\Users\asus1\Desktop\Courses\Yazlab1\src\sample\Logs
-public class A extends Players{
+public class A extends Players {
 
-    public A(int moveCost,int targetCost,int steps,int gold,int indexI,int indexJ,int matrixM,int matrixN){
+    public A(int moveCost, int targetCost, int steps, int gold, int indexI, int indexJ, int matrixM, int matrixN) {
 
         this.gold = gold;
         this.steps = steps;
@@ -33,9 +33,17 @@ public class A extends Players{
 
     }
 
+    public int getIndexI() {
+        return this.indexI;
+    }
+
+    public int getIndexJ() {
+        return this.indexJ;
+    }
+
     //En yakindaki altini hedefler
     @Override
-    public void selectTarget(int matrix[][],int targetCost,int playerI,int playerJ){
+    public void selectTarget(int matrix[][], int targetCost, int playerI, int playerJ) {
         //Search algorithm
         double tempDist = 1000;
         int tempI = 0,tempJ = 0;
@@ -65,17 +73,16 @@ public class A extends Players{
     @Override
     public void log(Players player) {
         //logA.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
-        System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
+        System.out.println(player.logFile.getName() + " dosyasına yazılıyor...");
         try {
-            writer = new FileWriter("src/sample/Logs/logs.txt",true);
+            writer = new FileWriter("src/sample/Logs/logs.txt", true);
             writer.write("\nA Oyuncusu\n\n");
-            writer.write("Kalan Altın Miktarı : "+player.gold+" \nHarcanan Toplam Altın Miktarı :"+player.goldSpent
-                    +" \nToplam Atılan Adım Sayısı : "+player.stepsCount);
+            writer.write("Kalan Altın Miktarı : " + player.gold + " \nHarcanan Toplam Altın Miktarı :" + player.goldSpent
+                    + " \nToplam Atılan Adım Sayısı : " + player.stepsCount);
             writer.write("\n----\n");
             writer.close();
             System.out.println("Yazma işlemi tamamlandı!");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Bir sorun meydana geldi.");
             e.printStackTrace();
         }

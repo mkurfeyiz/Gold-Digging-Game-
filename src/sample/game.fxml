@@ -135,6 +135,7 @@
         <GridPane fx:id="board" alignment="CENTER" gridLinesVisible="true" layoutX="170.0" layoutY="110.0" prefHeight="400.0" prefWidth="400.0">
 
         </GridPane>
+      <Button fx:id="startGame" layoutX="428.0" layoutY="735.0" mnemonicParsing="false" onAction="#startGame" prefHeight="50.0" prefWidth="90.0" text="Start Game" />
 
 
     </children>

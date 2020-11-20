@@ -79,10 +79,10 @@ public class Game {
         this.n = n;
 
         //Players
-        A = new A(movementCostA,targetingCostA,stepsSetting,gold,0,0,m,n);
-        B = new B(movementCostB,targetingCostB,stepsSetting,gold,0,n,m,n);
-        C = new C(movementCostC,targetingCostC,stepsSetting,gold,m,0,m,n);
-        D = new D(movementCostD,targetingCostD,stepsSetting,gold,m,n,m,n);
+        A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
+        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, n, m, n);
+        C = new C(movementCostC, targetingCostC, stepsSetting, gold, m, 0, m, n);
+        D = new D(movementCostD, targetingCostD, stepsSetting, gold, m, n, m, n);
 
         //Setting first positions for players
 
@@ -93,7 +93,7 @@ public class Game {
         goldCounter();
         setGameBoard();
 
-        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
+        A.selectTarget(gameBoard, targetingCostA, A.getIndexI(), A.getIndexJ());
         B.selectTarget(gameBoard,targetingCostB,B.getIndexI(),B.getIndexJ());
 
         /*for(int i=0;i<m;i++){
@@ -197,7 +197,6 @@ public class Game {
 
         }
 
-
         //Showing matrix values on gridpane
         for (int i = 0; i < m; i++) {
 
@@ -228,31 +227,48 @@ public class Game {
                 }
             }
         }
-
-        /*for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                System.out.print(gameBoard[i][j]+" ");
-            }
-            System.out.println();
-        }*/
-
     }
 
-    public void movementA() {
-
-        int startColumnA = 0;
-        int startRowA = 0;
-        int var;
-        int closestPoint[][];
-        int i = 0, j = 0;
-
+    public boolean tableGoldChecker(boolean var) {
+        int i;
+        int j;
         for (i = 0; i < m; i++) {
             for (j = 0; j < n; j++) {
-                if (gameBoard[i][j] != 0) {
-                    System.out.println("selam");
+                if (gameBoard[i][j] != 1) {
+                    var = true;
+                } else {
+                    var = false;
                 }
             }
+        }
+        return var;
+    }
 
+    public boolean playerGoldChecker(boolean param, int goldA, int goldB, int goldC, int goldD) {
+
+        if (goldA == 0 && goldB == 0 && goldC == 0 && goldD == 0) {
+            param = false;
+        } else {
+            param = true;
+        }
+        return param;
+    }
+
+    public void startGame() {
+
+        boolean param = true;
+        int goldForA = gold;
+        int goldForB = gold;
+        int goldForC = gold;
+        int goldForD = gold;
+
+        playerGoldChecker(param, goldForA, goldForB, goldForC, goldForD);
+        tableGoldChecker(param);
+
+        while (param == true) {
+
+            playerGoldChecker(param, goldForA, goldForB, goldForC, goldForD);
+            tableGoldChecker(param);
         }
     }
 }
