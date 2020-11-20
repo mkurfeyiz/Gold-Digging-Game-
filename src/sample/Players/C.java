@@ -31,9 +31,9 @@ public class C extends Players{
 
     }
 
-    //Hedef belirlemeden once kendine en yakin belirli sayidaki gizli altini acar.
+    // Hedef belirlemeden once kendine en yakin belirli sayidaki gizli altini acar.
     // Bu açılan altınlarla birlikte tüm altınlar içerisinden B oyuncusu
-    //gibi en karlı olanı hedefler
+    // gibi en karlı olanı hedefler
     @Override
     public void selectTarget(int matrix[][],int targetCost,int indexI,int indexJ){
         //Search algorithm

@@ -1,14 +1,11 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
 import sample.Players.*;
 
 import java.util.ArrayList;
@@ -97,7 +94,6 @@ public class Game {
         setGameBoard();
 
         A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
-
 
         /*for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){

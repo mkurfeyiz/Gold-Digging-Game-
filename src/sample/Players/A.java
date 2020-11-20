@@ -45,14 +45,15 @@ public class A extends Players{
     @Override
     public void selectTarget(int matrix[][],int targetCost,int playerI,int playerJ){
         //Search algorithm
-        int tempDist = 1000;
+        double tempDist = 1000;
         int tempI = 0,tempJ = 0;
         playerI = this.indexI;
         playerJ = this.indexJ;
 
+
         for (int i=0;i<matrixM;i++){
             for(int j=0;j<matrixN;j++){
-                if(matrix[i][j]!=1 && calcDistance(playerI,playerJ,i,j) < tempDist){
+                if(matrix[i][j]!=1 && matrix[i][j]!=50 && calcDistance(playerI,playerJ,i,j) < tempDist){
                     tempDist = calcDistance(playerI,playerJ,i,j);
                     tempI = i;
                     tempJ = j;
@@ -61,7 +62,9 @@ public class A extends Players{
         }
 
 
-        System.out.println("A oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
+        System.out.println("\nA oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
+        System.out.println("Uzaklık : "+tempDist);
+
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;
@@ -86,7 +89,4 @@ public class A extends Players{
         }
 
     }
-
-
-
 }
