@@ -68,17 +68,37 @@ public class Game {
     int randomSecretGoldCounter;
     int points[] = {5, 10, 15, 20};
 
+    //Players
+    A A;
+    B B;
+    C C;
+    D D;
+
 
     public void getSettings(int m, int n, int goldPerc, int gold, int stepsSetting, int movementCostA, int targetingCostA
             , int movementCostB, int targetingCostB, int movementCostC, int targetingCostC, int movementCostD, int targetingCostD) {
         //Oyun degerleri
         this.m = m;
         this.n = n;
+
+        //Players
+        A = new A(movementCostA,targetingCostA,stepsSetting,gold,0,0,m,n);
+        B = new B(movementCostB,targetingCostB,stepsSetting,gold,0,n,m,n);
+        C = new C(movementCostC,targetingCostC,stepsSetting,gold,m,0,m,n);
+        D = new D(movementCostD,targetingCostD,stepsSetting,gold,m,n,m,n);
+
+        //Setting first positions for players
+
+
         //Oyun Tahtasi
         this.gameBoard = new int[m][n];
         goldLabels = new ArrayList<>(m * n);
         goldCounter();
         setGameBoard();
+
+        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
+
+
         /*for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 System.out.print(gameBoard[i][j]+" ");
@@ -136,13 +156,14 @@ public class Game {
         //Creating labels to show matrix values on gridpane
         for (int i = 0; i < m * n; i++) {
 
-            goldLabels.add(new Label("0"));
+            goldLabels.add(new Label("1"));
+            goldLabels.get(i).setAlignment(Pos.CENTER);
         }
 
         //Initializing first values for gameBoard
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                gameBoard[i][j] = 0;
+                gameBoard[i][j] = 1;
             }
         }
 
@@ -173,7 +194,7 @@ public class Game {
             if (((index1 != 0 && index2 != 0) && (index1 != 0 && index2 != n) && (index1 != m && index2 != 0) && (index1 != m && index2 != n))
                     && gameBoard[index1][index2] != 0) {
 
-                gameBoard[index1][index2] = 1;
+                gameBoard[index1][index2] = 50;
                 counter++;
             }
 
@@ -184,7 +205,7 @@ public class Game {
         for (int i = 0; i < m; i++) {
 
             for (int j = 0; j < n; j++) {
-                if (gameBoard[i][j] == 1 || gameBoard[i][j] != 0) {
+                if (gameBoard[i][j] == 50 || gameBoard[i][j] != 1) {
                     goldLabels.get(indexCount).setText(Integer.toString(gameBoard[i][j]));
                     board.add(goldLabels.get(indexCount), j, i);
                     board.setAlignment(Pos.CENTER);

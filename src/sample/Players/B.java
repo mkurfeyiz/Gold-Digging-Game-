@@ -7,12 +7,16 @@ import java.io.IOException;
 public class B extends Players{
 
 
-    public B(int moveCost,int targetCost,int steps,int gold){
+    public B(int moveCost,int targetCost,int steps,int gold,int indexI,int indexJ,int matrixM,int matrixN){
 
         this.gold = gold;
         this.steps = steps;
         this.moveCost = moveCost;
         this.targetCost = targetCost;
+        this.indexI = indexI;
+        this.indexJ = indexJ;
+        this.matrixM = matrixM;
+        this.matrixN = matrixN;
 
         try {
             this.logFile = new File("src/sample/Logs/logs.txt");
@@ -29,12 +33,29 @@ public class B extends Players{
 
     //En yakindaki en karli altini hedefler
     @Override
-    public void selectTarget(int moveCost,int targetCost){
+    public void selectTarget(int matrix[][],int targetCost,int playerI,int playerJ){
         //Search algorithm
+        int tempDist = 1000;
+        int tempI = 0,tempJ = 0;
+        int tempGold = 0;
+        playerI = this.indexI;
+        playerJ = this.indexJ;
 
-        this.gold -= moveCost;
+        for (int i=0;i<matrixM;i++){
+            for(int j=0;j<matrixN;j++){
+                if(matrix[i][j]!=1 && calcDistance(playerI,playerJ,i,j) < tempDist){
+                    tempDist = calcDistance(playerI,playerJ,i,j);
+                    tempI = i;
+                    tempJ = j;
+                }
+            }
+        }
+
+
+        System.out.println("B oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
+
         this.gold -= targetCost;
-        this.goldSpent = moveCost + targetCost;
+        this.goldSpent += targetCost;
     }
 
     @Override
@@ -56,5 +77,7 @@ public class B extends Players{
         }
 
     }
+
+
 
 }

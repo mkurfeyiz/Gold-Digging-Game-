@@ -7,12 +7,16 @@ import java.io.IOException;
 public class C extends Players{
 
 
-    public C(int moveCost,int targetCost,int steps,int gold){
+    public C(int moveCost,int targetCost,int steps,int gold,int indexI,int indexJ,int matrixM,int matrixN){
 
         this.gold = gold;
         this.steps = steps;
         this.moveCost = moveCost;
         this.targetCost = targetCost;
+        this.indexI = indexI;
+        this.indexJ = indexJ;
+        this.matrixM = matrixM;
+        this.matrixN = matrixN;
 
         try {
             this.logFile = new File("src/sample/Logs/logs.txt");
@@ -31,12 +35,12 @@ public class C extends Players{
     // Bu açılan altınlarla birlikte tüm altınlar içerisinden B oyuncusu
     //gibi en karlı olanı hedefler
     @Override
-    public void selectTarget(int moveCost,int targetCost){
+    public void selectTarget(int matrix[][],int targetCost,int indexI,int indexJ){
         //Search algorithm
 
-        this.gold -= moveCost;
+
         this.gold -= targetCost;
-        this.goldSpent = moveCost + targetCost;
+        this.goldSpent += targetCost;
     }
 
     @Override
@@ -58,5 +62,7 @@ public class C extends Players{
         }
 
     }
+
+
 
 }
