@@ -84,8 +84,8 @@ public class C extends Players{
         }
 
         System.out.println("\nC oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-        System.out.println("Yapacağı Hamle Sayısı : "+Math.ceil(tempDist/this.steps));
-        System.out.println("Kazanç : "+totalProfit);
+        System.out.println("Yapacağı Hamle Sayısı : "+(int)Math.ceil(tempDist/this.steps));
+        System.out.println("Kazanç : "+(int)totalProfit);
 
         this.targetI = tempI;
         this.targetJ = tempJ;

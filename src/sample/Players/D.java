@@ -68,7 +68,7 @@ public class D extends Players {
 
             System.out.println("\nD,A'nın hedefine daha yakın olduğu için "+tempI+","+tempJ+" noktasını hedefledi.");
             System.out.println("Hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-            System.out.println("Uzaklık : "+Math.ceil(tempDist / this.steps));
+            System.out.println("Yapacağı Hamle Sayısı : "+(int)Math.ceil(tempDist / this.steps));
 
         } else if (calcDistance(playerI, playerJ, b.getTargetI(), b.getTargetJ()) < //d ile b
                 calcDistance(b.getIndexI(), b.getIndexJ(), b.getTargetI(), b.getTargetJ())) {
@@ -79,7 +79,7 @@ public class D extends Players {
 
             System.out.println("\nD,B'nin hedefine daha yakın olduğu için "+tempI+","+tempJ+" noktasını hedefledi.");
             System.out.println("Hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-            System.out.println("Uzaklık : "+Math.ceil(tempDist / this.steps));
+            System.out.println("Yapacağı Hamle Sayısı : "+(int)Math.ceil(tempDist / this.steps));
 
         } else if (calcDistance(playerI, playerJ, c.getTargetI(), c.getTargetJ()) < //d ile c
                 calcDistance(c.getIndexI(), c.getIndexJ(), c.getTargetI(), c.getTargetJ())) {
@@ -90,7 +90,7 @@ public class D extends Players {
 
             System.out.println("\nD,C'nin hedefine daha yakın olduğu için "+tempI+","+tempJ+" noktasını hedefledi.");
             System.out.println("Hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-            System.out.println("Uzaklık : "+Math.ceil(tempDist / this.steps));
+            System.out.println("Yapacağı Hamle Sayısı : "+(int)Math.ceil(tempDist / this.steps));
 
         } else {
 
@@ -125,8 +125,8 @@ public class D extends Players {
             }
 
             System.out.println("\nD oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-            System.out.println("Yapacağı Hamle Sayısı : "+Math.ceil(tempDist/this.steps));
-            System.out.println("Kazanç : "+totalProfit);
+            System.out.println("Yapacağı Hamle Sayısı : "+(int)Math.ceil(tempDist/this.steps));
+            System.out.println("Kazanç : "+(int)totalProfit);
 
         }
 

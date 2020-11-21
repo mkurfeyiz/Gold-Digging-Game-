@@ -78,29 +78,6 @@ public class Game {
         this.m = m;
         this.n = n;
 
-        //Players
-        A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
-        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, 5, m, n);
-        C = new C(movementCostC, targetingCostC, stepsSetting, gold, 0, 15, m, n);
-        D = new D(movementCostD, targetingCostD, stepsSetting, gold, 0, 10, m, n);
-
-        //Setting first positions for players
-
-
-        //Oyun Tahtasi
-        this.gameBoard = new int[m][n];
-        goldLabels = new ArrayList<>(m * n);
-        goldCounter();
-        setGameBoard();
-
-        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
-        B.selectTarget(gameBoard,targetingCostB,B.getIndexI(),B.getIndexJ());
-        C.selectTarget(gameBoard,targetingCostC,C.getIndexI(),C.getIndexJ());
-        D.selectTarget(gameBoard,targetingCostD,D.getIndexI(),D.getIndexJ(),A,B,C);
-
-
-        updateGameBoard();
-
         /*for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 System.out.print(gameBoard[i][j]+" ");
@@ -143,6 +120,27 @@ public class Game {
         goldB.setText(Integer.toString(this.gold));
         goldC.setText(Integer.toString(this.gold));
         goldD.setText(Integer.toString(this.gold));
+
+        //Players
+        A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
+        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, 5, m, n);
+        C = new C(movementCostC, targetingCostC, stepsSetting, gold, 0, 15, m, n);
+        D = new D(movementCostD, targetingCostD, stepsSetting, gold, 0, 10, m, n);
+
+
+        //Oyun Tahtasi
+        this.gameBoard = new int[m][n];
+        goldLabels = new ArrayList<>(m * n);
+        goldCounter();
+        setGameBoard();
+
+        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
+        B.selectTarget(gameBoard,targetingCostB,B.getIndexI(),B.getIndexJ());
+        C.selectTarget(gameBoard,targetingCostC,C.getIndexI(),C.getIndexJ());
+        D.selectTarget(gameBoard,targetingCostD,D.getIndexI(),D.getIndexJ(),A,B,C);
+
+
+        updateGameBoard();
 
     }
 
@@ -270,6 +268,11 @@ public class Game {
                 }
             }
         }
+
+        goldA.setText(Integer.toString(A.getGold()));
+        goldB.setText(Integer.toString(B.getGold()));
+        goldC.setText(Integer.toString(C.getGold()));
+        goldD.setText(Integer.toString(D.getGold()));
 
     }
 

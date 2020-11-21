@@ -18,6 +18,10 @@ public abstract class Players {
     public abstract void selectTarget(int matrix[][],int targetCost,int indexI,int indexJ);
     public abstract void log(Players player);
 
+    public int getGold(){
+        return this.gold;
+    }
+
     public int getStepsCount() {
         return stepsCount;
     }
