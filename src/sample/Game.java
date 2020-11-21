@@ -80,9 +80,9 @@ public class Game {
 
         //Players
         A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
-        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, n, m, n);
-        C = new C(movementCostC, targetingCostC, stepsSetting, gold, m, 0, m, n);
-        D = new D(movementCostD, targetingCostD, stepsSetting, gold, m, n, m, n);
+        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, 5, m, n);
+        C = new C(movementCostC, targetingCostC, stepsSetting, gold, 0, 15, m, n);
+        D = new D(movementCostD, targetingCostD, stepsSetting, gold, 0, 10, m, n);
 
         //Setting first positions for players
 
@@ -93,8 +93,13 @@ public class Game {
         goldCounter();
         setGameBoard();
 
-        A.selectTarget(gameBoard, targetingCostA, A.getIndexI(), A.getIndexJ());
+        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
         B.selectTarget(gameBoard,targetingCostB,B.getIndexI(),B.getIndexJ());
+        C.selectTarget(gameBoard,targetingCostC,C.getIndexI(),C.getIndexJ());
+        D.selectTarget(gameBoard,targetingCostD,D.getIndexI(),D.getIndexJ(),A,B,C);
+
+
+        updateGameBoard();
 
         /*for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
@@ -149,7 +154,8 @@ public class Game {
 
     public void setGameBoard() {
         Random random = new Random();
-        int index1, index2, pointIndex, counter = 0, indexCount = 0;
+        int index1, index2, pointIndex, counter = 0;
+        int  indexCount = 0, secretCounter = 0;
         //Creating labels to show matrix values on gridpane
         for (int i = 0; i < m * n; i++) {
 
@@ -171,7 +177,9 @@ public class Game {
             index1 = random.nextInt(m);
             index2 = random.nextInt(n);
 
-            if (((index1 != 0 && index2 != 0) && (index1 != 0 && index2 != n) && (index1 != m && index2 != 0) && (index1 != m && index2 != n))
+            if ((index1 != A.getIndexI() && index2 != A.getIndexJ() &&
+                    index1 != B.getIndexI() && index2 != B.getIndexJ() &&
+                    index1 != C.getIndexI() && index2 != C.getIndexJ() && index1 != D.getIndexI() && index2 != D.getIndexJ())
             ) {
                 //random value for golds
                 pointIndex = random.nextInt(4);
@@ -180,22 +188,22 @@ public class Game {
             }
 
         }
-        counter = 0;
-        //Set the value of secret golds to 1
-        while (counter < randomSecretGoldCounter) {
+
+        //Set the value of secret golds to 50
+        while (secretCounter < randomSecretGoldCounter) {
 
             //random position for golds
             index1 = random.nextInt(m);
             index2 = random.nextInt(n);
 
-            if (((index1 != 0 && index2 != 0) && (index1 != 0 && index2 != n) && (index1 != m && index2 != 0) && (index1 != m && index2 != n))
-                    && gameBoard[index1][index2] != 0) {
+            if (gameBoard[index1][index2] != 1) {
 
                 gameBoard[index1][index2] = 50;
-                counter++;
+                secretCounter++;
             }
 
         }
+
 
         //Showing matrix values on gridpane
         for (int i = 0; i < m; i++) {
@@ -206,19 +214,19 @@ public class Game {
                     board.add(goldLabels.get(indexCount), j, i);
                     board.setAlignment(Pos.CENTER);
                     indexCount++;
-                } else if (((i == 0 && j == 0))) {
+                } else if ((i == A.getIndexI() && j == A.getIndexJ())) {
                     goldLabels.get(indexCount).setText("A");
                     board.add(goldLabels.get(indexCount), j, i);
                     indexCount++;
-                } else if ((i == 0 && j == n - 1)) {
+                } else if ((i == B.getIndexI() && j == B.getIndexJ())) {
                     goldLabels.get(indexCount).setText("B");
                     board.add(goldLabels.get(indexCount), j, i);
                     indexCount++;
-                } else if ((i == m - 1 && j == 0)) {
+                } else if ((i == C.getIndexI() && j == C.getIndexJ())) {
                     goldLabels.get(indexCount).setText("C");
                     board.add(goldLabels.get(indexCount), j, i);
                     indexCount++;
-                } else if ((i == m - 1 && j == n - 1)) {
+                } else if ((i == D.getIndexI() && j == D.getIndexJ())) {
                     goldLabels.get(indexCount).setText("D");
                     board.add(goldLabels.get(indexCount), j, i);
                     indexCount++;
@@ -227,6 +235,42 @@ public class Game {
                 }
             }
         }
+
+    }
+
+    public void updateGameBoard(){
+
+        int  indexCount = 0;
+        //Showing matrix values on gridpane
+        for (int i = 0; i < m; i++) {
+
+            for (int j = 0; j < n; j++) {
+                if (gameBoard[i][j] == 50 || gameBoard[i][j] != 1) {
+                    goldLabels.get(indexCount).setText(Integer.toString(gameBoard[i][j]));
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else if(i == A.getIndexI() && j == A.getIndexJ()){
+                    goldLabels.get(indexCount).setText("A");
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else if(i == B.getIndexI() && j == B.getIndexJ()){
+                    goldLabels.get(indexCount).setText("B");
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else if(i == C.getIndexI() && j == C.getIndexJ()){
+                    goldLabels.get(indexCount).setText("C");
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else if(i == D.getIndexI() && j == D.getIndexJ()){
+                    goldLabels.get(indexCount).setText("D");
+                    board.setAlignment(Pos.CENTER);
+                    indexCount++;
+                } else {
+                    indexCount++;
+                }
+            }
+        }
+
     }
 
     public boolean tableGoldChecker(boolean var) {

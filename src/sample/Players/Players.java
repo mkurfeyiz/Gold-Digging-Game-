@@ -9,6 +9,8 @@ public abstract class Players {
     int gold,steps,stepsCount,goldSpent;
     int indexI,indexJ;
     int matrixM,matrixN;
+    int targetI,targetJ,targetDist;
+    boolean flag;
 
     FileWriter writer;
     File logFile;
@@ -36,6 +38,30 @@ public abstract class Players {
 
     public int getIndexJ(){
         return this.indexJ;
+    }
+
+    public int getTargetI(){
+        return this.targetI;
+    }
+
+    public int getTargetJ(){
+        return this.targetJ;
+    }
+
+    public boolean getFlag(){
+        return this.flag;
+    }
+
+    public int getMoveCost(){
+        return  this.moveCost;
+    }
+
+    public int getTargetCost(){
+        return this.targetCost;
+    }
+
+    public int getTargetDist(){
+        return this.targetDist;
     }
 
 }

@@ -21,7 +21,7 @@ public class A extends Players {
         this.matrixN = matrixN;
 
         try {
-            this.logFile = new File("src/sample/Logs/logs.txt");
+            this.logFile = new File("src/sample/Logs/logA.txt");
             if (logFile.createNewFile()) {
                 System.out.println(logFile.getName() + " dosyası oluşturuldu.");
             }
@@ -61,10 +61,12 @@ public class A extends Players {
             }
         }
 
+        this.targetI = tempI;
+        this.targetJ = tempJ;
+        this.targetDist = (int) Math.ceil(tempDist/this.steps);
 
         System.out.println("\nA oyuncusunun hedefi "+tempI+","+tempJ+" ve hedefteki altın miktarı : "+matrix[tempI][tempJ]);
-        System.out.println("Uzaklık : "+tempDist);
-
+        System.out.println("Yapacağı Hamle Sayısı : "+targetDist);
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;
@@ -75,7 +77,7 @@ public class A extends Players {
         //logA.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
         System.out.println(player.logFile.getName() + " dosyasına yazılıyor...");
         try {
-            writer = new FileWriter("src/sample/Logs/logs.txt", true);
+            writer = new FileWriter("src/sample/Logs/logA.txt", true);
             writer.write("\nA Oyuncusu\n\n");
             writer.write("Kalan Altın Miktarı : " + player.gold + " \nHarcanan Toplam Altın Miktarı :" + player.goldSpent
                     + " \nToplam Atılan Adım Sayısı : " + player.stepsCount);
