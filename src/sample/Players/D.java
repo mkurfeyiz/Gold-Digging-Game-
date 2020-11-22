@@ -37,11 +37,7 @@ public class D extends Players {
     //olarak diğer altın kareler içerisinden en karlı olanı seçer.
     @Override
     public void selectTarget(int matrix[][], int targetCost, int indexI, int indexJ) {
-        //Search algorithm
 
-
-        this.gold -= targetCost;
-        this.goldSpent += targetCost;
     }
 
     //Digerlerinin hedefine onlardan once erisebiliyosa hedef olarak onu belirler.Ancak gidemiyosa
@@ -137,6 +133,9 @@ public class D extends Players {
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;
+        this.flag = true;
+
+        setStepsRemaining();
     }
 
     @Override
@@ -155,6 +154,75 @@ public class D extends Players {
             System.out.println("Bir sorun meydana geldi.");
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void movement(int[][] matrix,Players a,Players b,Players c) {
+
+        int counter = 0;
+
+        while(counter < this.steps){
+
+            if(this.indexI != this.targetI){
+                if(this.indexI < this.targetI){
+                    this.indexI++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexI > targetI){
+                    this.indexI--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            if(this.indexJ != this.targetJ){
+                if(this.indexJ < this.targetJ){
+                    this.indexJ++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexJ > targetJ){
+                    this.indexJ--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            //Getting another players target
+            if(this.indexI == b.targetI && this.indexJ == b.targetJ){
+                //Stealing from b
+                System.out.println("D oyuncusu,B oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                b.flag = false;
+
+            } else if(this.indexI == c.targetI && this.indexJ == c.targetJ){
+                //Stealing from c
+                System.out.println("D oyuncusu,C oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                c.flag = false;
+
+            } else if(this.indexI == a.targetI && this.indexJ == a.targetJ){
+                //Stealing from a
+                System.out.println("D oyuncusu,A oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                a.flag = false;
+
+            }
+
+            if(this.indexI == targetI && this.indexJ == this.targetJ){
+                System.out.println("A oyuncusu hedefine ulaştı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            }
+        }
+
+        this.gold -= this.moveCost;
+        this.goldSpent += this.moveCost;
 
     }
 

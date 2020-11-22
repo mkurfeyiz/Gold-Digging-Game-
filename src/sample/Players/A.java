@@ -70,6 +70,10 @@ public class A extends Players {
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;
+        this.flag = true;
+
+        setStepsRemaining();
+        //System.out.println("hedefe olan adım sayısı "+this.stepsRemaining);
     }
 
     @Override
@@ -89,5 +93,72 @@ public class A extends Players {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void movement(int[][] matrix,Players b,Players c,Players d) {
+        int counter = 0;
+
+        while(counter < this.steps){
+
+            if(this.indexI != this.targetI){
+                if(this.indexI < this.targetI){
+                    this.indexI++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexI > targetI){
+                    this.indexI--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            if(this.indexJ != this.targetJ){
+                if(this.indexJ < this.targetJ){
+                    this.indexJ++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexJ > targetJ){
+                    this.indexJ--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            //Getting another players target
+            if(this.indexI == b.targetI && this.indexJ == b.targetJ){
+
+                System.out.println("A oyuncusu,B oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                b.flag = false;
+
+            } else if(this.indexI == c.targetI && this.indexJ == c.targetJ){
+
+                System.out.println("A oyuncusu,C oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                c.flag = false;
+
+            } else if(this.indexI == d.targetI && this.indexJ == d.targetJ){
+
+                System.out.println("A oyuncusu,D oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                d.flag = false;
+
+            }
+
+            if(this.indexI == targetI && this.indexJ == this.targetJ){
+                System.out.println("A oyuncusu hedefine ulaştı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            }
+        }
+
+        this.gold -= this.moveCost;
+        this.goldSpent += this.moveCost;
     }
 }

@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -78,13 +79,6 @@ public class Game {
         this.m = m;
         this.n = n;
 
-        /*for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                System.out.print(gameBoard[i][j]+" ");
-            }
-            System.out.println();
-        }*/
-
         for (int i = 0; i < m; i++) {
 
             this.board.getRowConstraints().add(new RowConstraints(30));
@@ -123,9 +117,9 @@ public class Game {
 
         //Players
         A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
-        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, 5, m, n);
-        C = new C(movementCostC, targetingCostC, stepsSetting, gold, 0, 15, m, n);
-        D = new D(movementCostD, targetingCostD, stepsSetting, gold, 0, 10, m, n);
+        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, n, m, n);
+        C = new C(movementCostC, targetingCostC, stepsSetting, gold, m, 0, m, n);
+        D = new D(movementCostD, targetingCostD, stepsSetting, gold, m, n, m, n);
 
 
         //Oyun Tahtasi
@@ -133,14 +127,6 @@ public class Game {
         goldLabels = new ArrayList<>(m * n);
         goldCounter();
         setGameBoard();
-
-        A.selectTarget(gameBoard,targetingCostA,A.getIndexI(),A.getIndexJ());
-        B.selectTarget(gameBoard,targetingCostB,B.getIndexI(),B.getIndexJ());
-        C.selectTarget(gameBoard,targetingCostC,C.getIndexI(),C.getIndexJ());
-        D.selectTarget(gameBoard,targetingCostD,D.getIndexI(),D.getIndexJ(),A,B,C);
-
-
-        updateGameBoard();
 
     }
 
@@ -274,6 +260,11 @@ public class Game {
         goldC.setText(Integer.toString(C.getGold()));
         goldD.setText(Integer.toString(D.getGold()));
 
+        stepsA.setText(Integer.toString(A.getStepsCount()));
+        stepsB.setText(Integer.toString(B.getStepsCount()));
+        stepsC.setText(Integer.toString(C.getStepsCount()));
+        stepsD.setText(Integer.toString(D.getStepsCount()));
+
     }
 
     public boolean tableGoldChecker(boolean var) {
@@ -283,6 +274,7 @@ public class Game {
             for (j = 0; j < n; j++) {
                 if (gameBoard[i][j] != 1) {
                     var = true;
+                    break;
                 } else {
                     var = false;
                 }
@@ -293,7 +285,7 @@ public class Game {
 
     public boolean playerGoldChecker(boolean param, int goldA, int goldB, int goldC, int goldD) {
 
-        if (goldA == 0 && goldB == 0 && goldC == 0 && goldD == 0) {
+        if (goldA <= 0 && goldB <= 0 && goldC <= 0 && goldD <= 0) {
             param = false;
         } else {
             param = true;
@@ -304,18 +296,59 @@ public class Game {
     public void startGame() {
 
         boolean param = true;
-        int goldForA = gold;
-        int goldForB = gold;
-        int goldForC = gold;
-        int goldForD = gold;
-
-        playerGoldChecker(param, goldForA, goldForB, goldForC, goldForD);
-        tableGoldChecker(param);
-
-        while (param == true) {
-
-            playerGoldChecker(param, goldForA, goldForB, goldForC, goldForD);
-            tableGoldChecker(param);
+        //Oyuncunun flagi false ise hedef sectir,true ise hareket ettir.Oyuncu hedefe ulasirsa flagi false yap.
+        //A
+        if(!A.getFlag() && A.getGold() > 0){
+            A.selectTarget(gameBoard,A.getTargetCost(),A.getIndexI(),A.getIndexJ());
+        } else if(A.getGold() > 0 && A.getFlag()){
+            A.movement(gameBoard,B,C,D);
+        } else {
+            System.out.println("A oyuncusu elendi.");
         }
+        //B
+        if(!B.getFlag() && B.getGold() > 0){
+            B.selectTarget(gameBoard,B.getTargetCost(),B.getIndexI(),B.getIndexJ());
+        } else if(B.getGold() > 0 && B.getFlag()){
+            B.movement(gameBoard,A,C,D);
+        } else {
+            System.out.println("B oyuncusu elendi.");
+        }
+        //C
+        if(!C.getFlag() && C.getGold() > 0){
+            C.selectTarget(gameBoard,C.getTargetCost(),C.getIndexI(),C.getIndexJ());
+        } else if(C.getGold() > 0 && C.getFlag()){
+            C.movement(gameBoard,A,B,D);
+        } else {
+            System.out.println("C oyuncusu elendi.");
+        }
+        //D
+        if(!D.getFlag() && D.getGold() > 0){
+            D.selectTarget(gameBoard,D.getTargetCost(),D.getIndexI(),D.getIndexJ(),A,B,C);
+        } else if(D.getGold() > 0 && D.getFlag()){
+            D.movement(gameBoard,A,B,C);
+        } else {
+            System.out.println("D oyuncusu elendi.");
+        }
+
+        /*A.log(A);
+        B.log(B);
+        C.log(C);
+        D.log(D);*/
+
+        updateGameBoard();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(!playerGoldChecker(param, A.getGold(),B.getGold(),C.getGold(),D.getGold())){
+            alert.setTitle("Oyun Sonu");
+            alert.setHeaderText(null);
+            alert.setContentText("Tüm oyuncuların altını bittiği için oyun sona erdi!");
+            alert.showAndWait();
+        } else if(!tableGoldChecker(param)){
+            alert.setTitle("Oyun Sonu");
+            alert.setHeaderText(null);
+            alert.setContentText("Oyun tahtasındaki altınlar bittiği için oyun sona erdi!");
+            alert.showAndWait();
+        }
+
     }
 }

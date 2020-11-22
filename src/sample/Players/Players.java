@@ -9,14 +9,16 @@ public abstract class Players {
     int gold,steps,stepsCount,goldSpent;
     int indexI,indexJ;
     int matrixM,matrixN;
-    int targetI,targetJ,targetDist;
+    int targetI,targetJ,targetDist;//targetDist = Kac hamlede hedefe ulasiyor
     boolean flag;
+    int stepsRemaining; // Hedefe kalan adim sayisi
 
     FileWriter writer;
     File logFile;
 
     public abstract void selectTarget(int matrix[][],int targetCost,int indexI,int indexJ);
     public abstract void log(Players player);
+    public abstract void movement(int matrix[][],Players p1,Players p2,Players p3);
 
     public int getGold(){
         return this.gold;
@@ -66,6 +68,14 @@ public abstract class Players {
 
     public int getTargetDist(){
         return this.targetDist;
+    }
+
+    public int getStepsRemaining(){ return  this.stepsRemaining; }
+
+    public void setStepsRemaining(){
+
+        this.stepsRemaining = Math.abs((this.indexI - this.targetI)) + Math.abs((this.indexJ - this.targetJ));
+
     }
 
 }

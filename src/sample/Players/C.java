@@ -45,27 +45,63 @@ public class C extends Players{
         double tempProfit ;
         int tempI = 0,tempJ = 0, secretI = 0,secretJ = 0;
         int secretGold = 1;
+        boolean control = false;
         playerI = this.indexI;
         playerJ = this.indexJ;
 
-        //Revealing the closest secret gold
         for (int i=0;i<matrixM;i++){
             for(int j=0;j<matrixN;j++){
-                if(matrix[i][j]==50 && calcDistance(playerI,playerJ,i,j) < tempDist){
-                    tempDist = calcDistance(playerI,playerJ,i,j);
-                    secretI = i;
-                    secretJ = j;
-                    secretGold = points[random.nextInt(4)];
+                if( matrix[i][j] == 50 ){
+                    control = true;
                 }
             }
         }
 
-        matrix[secretI][secretJ] = secretGold;
+        if(control){
 
-        System.out.println("\nC oyuncusu "+secretI+","+secretJ+" noktasındaki gizli altını açığa çıkardı.");
-        System.out.println("Gizli altının değeri : "+secretGold);
+            //Revealing the closest secret gold
+            for (int i=0;i<matrixM;i++){
+                for(int j=0;j<matrixN;j++){
+                    if(matrix[i][j]==50 && calcDistance(playerI,playerJ,i,j) < tempDist){
+                        tempDist = calcDistance(playerI,playerJ,i,j);
+                        secretI = i;
+                        secretJ = j;
+                        secretGold = points[random.nextInt(4)];
+                    }
+                }
+            }
 
-        tempDist = 1000;
+            matrix[secretI][secretJ] = secretGold;
+
+            System.out.println("\nC oyuncusu "+secretI+","+secretJ+" noktasındaki gizli altını açığa çıkardı.");
+            System.out.println("Gizli altının değeri : "+secretGold);
+
+            tempDist = 1000;
+
+            //Revealing the closest secret gold
+            for (int i=0;i<matrixM;i++){
+                for(int j=0;j<matrixN;j++){
+                    if(matrix[i][j]==50 && calcDistance(playerI,playerJ,i,j) < tempDist){
+                        tempDist = calcDistance(playerI,playerJ,i,j);
+                        secretI = i;
+                        secretJ = j;
+                        secretGold = points[random.nextInt(4)];
+                    }
+                }
+            }
+
+            matrix[secretI][secretJ] = secretGold;
+
+            System.out.println("\nC oyuncusu "+secretI+","+secretJ+" noktasında ikinci bir gizli altını açığa çıkardı.");
+            System.out.println("Gizli altının değeri : "+secretGold);
+
+            tempDist = 1000;
+
+        } else {
+            System.out.println("Oyun tahtasında gizli altın kalmadı.\n");
+        }
+
+
 
         for (int i=0;i<matrixM;i++){
             for(int j=0;j<matrixN;j++){
@@ -93,6 +129,9 @@ public class C extends Players{
 
         this.gold -= targetCost;
         this.goldSpent += targetCost;
+        this.flag = true;
+
+        setStepsRemaining();
     }
 
     @Override
@@ -115,6 +154,74 @@ public class C extends Players{
 
     }
 
+    @Override
+    public void movement(int[][] matrix,Players a,Players b,Players d) {
+
+        int counter = 0;
+
+        while(counter < this.steps){
+
+            if(this.indexI != this.targetI){
+                if(this.indexI < this.targetI){
+                    this.indexI++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexI > targetI){
+                    this.indexI--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            if(this.indexJ != this.targetJ){
+                if(this.indexJ < this.targetJ){
+                    this.indexJ++;
+                    this.stepsCount++;
+                    counter++;
+                } else if(this.indexJ > targetJ){
+                    this.indexJ--;
+                    this.stepsCount++;
+                    counter++;
+                }
+            }
+
+            //Getting another players target
+            if(this.indexI == a.targetI && this.indexJ == a.targetJ){
+
+                System.out.println("C oyuncusu,A oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                a.flag = false;
+
+            } else if(this.indexI == b.targetI && this.indexJ == b.targetJ){
+
+                System.out.println("C oyuncusu,B oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                b.flag = false;
+
+            } else if(this.indexI == d.targetI && this.indexJ == d.targetJ){
+
+                System.out.println("C oyuncusu,D oyuncusunun hedeflediği altını aldı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                d.flag = false;
+
+            }
+
+            if(this.indexI == targetI && this.indexJ == this.targetJ){
+                System.out.println("C oyuncusu hedefine ulaştı.");
+                this.gold += matrix[this.indexI][this.indexJ];
+                matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            }
+        }
+
+        this.gold -= this.moveCost;
+        this.goldSpent += this.moveCost;
+
+    }
 
 
 }
