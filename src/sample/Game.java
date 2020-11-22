@@ -39,7 +39,7 @@ public class Game {
     @FXML
     GridPane board;
 
-    ArrayList<Label> goldLabels;
+    Label goldLabels[][];
 
     //Oyun ayarlarinin degerleri
     int gameBoard[][];
@@ -117,14 +117,14 @@ public class Game {
 
         //Players
         A = new A(movementCostA, targetingCostA, stepsSetting, gold, 0, 0, m, n);
-        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, n, m, n);
-        C = new C(movementCostC, targetingCostC, stepsSetting, gold, m, 0, m, n);
-        D = new D(movementCostD, targetingCostD, stepsSetting, gold, m, n, m, n);
+        B = new B(movementCostB, targetingCostB, stepsSetting, gold, 0, this.n - 1, m, n);
+        C = new C(movementCostC, targetingCostC, stepsSetting, gold, this.m - 1, 0, m, n);
+        D = new D(movementCostD, targetingCostD, stepsSetting, gold, this.m - 1, this.n - 1, m, n);
 
 
         //Oyun Tahtasi
         this.gameBoard = new int[m][n];
-        goldLabels = new ArrayList<>(m * n);
+        this.goldLabels = new Label[m][n];
         goldCounter();
         setGameBoard();
 
@@ -139,12 +139,17 @@ public class Game {
     public void setGameBoard() {
         Random random = new Random();
         int index1, index2, pointIndex, counter = 0;
-        int  indexCount = 0, secretCounter = 0;
-        //Creating labels to show matrix values on gridpane
-        for (int i = 0; i < m * n; i++) {
+        int secretCounter = 0;
 
-            goldLabels.add(new Label("1"));
-            goldLabels.get(i).setAlignment(Pos.CENTER);
+        //Creating labels to show matrix values on gridpane
+        for (int i = 0; i < m; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                goldLabels[i][j] = new Label("1");
+
+            }
+
         }
 
         //Initializing first values for gameBoard
@@ -161,10 +166,9 @@ public class Game {
             index1 = random.nextInt(m);
             index2 = random.nextInt(n);
 
-            if ((index1 != A.getIndexI() && index2 != A.getIndexJ() &&
+            if (index1 != A.getIndexI() && index2 != A.getIndexJ() &&
                     index1 != B.getIndexI() && index2 != B.getIndexJ() &&
-                    index1 != C.getIndexI() && index2 != C.getIndexJ() && index1 != D.getIndexI() && index2 != D.getIndexJ())
-            ) {
+                    index1 != C.getIndexI() && index2 != C.getIndexJ() && index1 != D.getIndexI() && index2 != D.getIndexJ()) {
                 //random value for golds
                 pointIndex = random.nextInt(4);
                 gameBoard[index1][index2] = points[pointIndex];
@@ -193,67 +197,93 @@ public class Game {
         for (int i = 0; i < m; i++) {
 
             for (int j = 0; j < n; j++) {
-                if (gameBoard[i][j] == 50 || gameBoard[i][j] != 1) {
-                    goldLabels.get(indexCount).setText(Integer.toString(gameBoard[i][j]));
-                    board.add(goldLabels.get(indexCount), j, i);
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else if ((i == A.getIndexI() && j == A.getIndexJ())) {
-                    goldLabels.get(indexCount).setText("A");
-                    board.add(goldLabels.get(indexCount), j, i);
-                    indexCount++;
-                } else if ((i == B.getIndexI() && j == B.getIndexJ())) {
-                    goldLabels.get(indexCount).setText("B");
-                    board.add(goldLabels.get(indexCount), j, i);
-                    indexCount++;
-                } else if ((i == C.getIndexI() && j == C.getIndexJ())) {
-                    goldLabels.get(indexCount).setText("C");
-                    board.add(goldLabels.get(indexCount), j, i);
-                    indexCount++;
-                } else if ((i == D.getIndexI() && j == D.getIndexJ())) {
-                    goldLabels.get(indexCount).setText("D");
-                    board.add(goldLabels.get(indexCount), j, i);
-                    indexCount++;
-                } else {
-                    indexCount++;
+
+                if (gameBoard[i][j] != 1) {
+
+                    goldLabels[i][j].setText(Integer.toString(gameBoard[i][j]));
+                    board.add(goldLabels[i][j], j, i);
+
+                } else if (i == A.getIndexI() && j == A.getIndexJ()) {
+
+                    goldLabels[i][j].setText("A");
+                    board.add(goldLabels[i][j], j, i);
+
+                } else if (i == B.getIndexI() && j == B.getIndexJ()) {
+
+                    goldLabels[i][j].setText("B");
+                    board.add(goldLabels[i][j], j, i);
+
+                } else if (i == C.getIndexI() && j == C.getIndexJ()) {
+
+                    goldLabels[i][j].setText("C");
+                    board.add(goldLabels[i][j], j, i);
+
+                } else if (i == D.getIndexI() && j == D.getIndexJ()) {
+
+                    goldLabels[i][j].setText("D");
+                    board.add(goldLabels[i][j], j, i);
+
                 }
             }
         }
 
     }
 
-    public void updateGameBoard(){
+    public void updateGameBoard() {
 
-        int  indexCount = 0;
         //Showing matrix values on gridpane
         for (int i = 0; i < m; i++) {
 
             for (int j = 0; j < n; j++) {
-                if (gameBoard[i][j] == 50 || gameBoard[i][j] != 1) {
-                    goldLabels.get(indexCount).setText(Integer.toString(gameBoard[i][j]));
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else if(i == A.getIndexI() && j == A.getIndexJ()){
-                    goldLabels.get(indexCount).setText("A");
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else if(i == B.getIndexI() && j == B.getIndexJ()){
-                    goldLabels.get(indexCount).setText("B");
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else if(i == C.getIndexI() && j == C.getIndexJ()){
-                    goldLabels.get(indexCount).setText("C");
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else if(i == D.getIndexI() && j == D.getIndexJ()){
-                    goldLabels.get(indexCount).setText("D");
-                    board.setAlignment(Pos.CENTER);
-                    indexCount++;
-                } else {
-                    indexCount++;
+
+                if (gameBoard[i][j] != 1) {
+
+                    goldLabels[i][j].setText(Integer.toString(gameBoard[i][j]));
+
+                } else if ((i == A.getIndexI() && j == A.getIndexJ())) {
+
+                    goldLabels[i][j].setText("A");
+
+                } else if ((i == B.getIndexI() && j == B.getIndexJ())) {
+
+                    goldLabels[i][j].setText("B");
+
+                } else if ((i == C.getIndexI() && j == C.getIndexJ())) {
+
+                    goldLabels[i][j].setText("C");
+
+                } else if ((i == D.getIndexI() && j == D.getIndexJ())) {
+
+                    goldLabels[i][j].setText("D");
+
                 }
             }
         }
+
+        /*for (int i = 0; i < m; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                if (goldLabels[i][j].getText().matches("A") && i != A.getTargetI() && j != A.getTargetJ()) {
+
+                    goldLabels[i][j].setText("");
+
+                } else if (goldLabels[i][j].getText().matches("B") && i != B.getTargetI() && j != B.getTargetJ()) {
+
+                    goldLabels[i][j].setText("");
+
+                } else if (goldLabels[i][j].getText().matches("C") && i != C.getTargetI() && j != C.getTargetJ()) {
+
+                    goldLabels[i][j].setText("");
+
+                } else if (goldLabels[i][j].getText().matches("D") && i != D.getTargetI() && j != D.getTargetJ()) {
+
+                    goldLabels[i][j].setText("");
+
+                }
+
+            }
+        }*/
 
         goldA.setText(Integer.toString(A.getGold()));
         goldB.setText(Integer.toString(B.getGold()));
@@ -279,6 +309,10 @@ public class Game {
                     var = false;
                 }
             }
+
+            if (var) {
+                break;
+            }
         }
         return var;
     }
@@ -296,59 +330,74 @@ public class Game {
     public void startGame() {
 
         boolean param = true;
-        //Oyuncunun flagi false ise hedef sectir,true ise hareket ettir.Oyuncu hedefe ulasirsa flagi false yap.
-        //A
-        if(!A.getFlag() && A.getGold() > 0){
-            A.selectTarget(gameBoard,A.getTargetCost(),A.getIndexI(),A.getIndexJ());
-        } else if(A.getGold() > 0 && A.getFlag()){
-            A.movement(gameBoard,B,C,D);
-        } else {
-            System.out.println("A oyuncusu elendi.");
-        }
-        //B
-        if(!B.getFlag() && B.getGold() > 0){
-            B.selectTarget(gameBoard,B.getTargetCost(),B.getIndexI(),B.getIndexJ());
-        } else if(B.getGold() > 0 && B.getFlag()){
-            B.movement(gameBoard,A,C,D);
-        } else {
-            System.out.println("B oyuncusu elendi.");
-        }
-        //C
-        if(!C.getFlag() && C.getGold() > 0){
-            C.selectTarget(gameBoard,C.getTargetCost(),C.getIndexI(),C.getIndexJ());
-        } else if(C.getGold() > 0 && C.getFlag()){
-            C.movement(gameBoard,A,B,D);
-        } else {
-            System.out.println("C oyuncusu elendi.");
-        }
-        //D
-        if(!D.getFlag() && D.getGold() > 0){
-            D.selectTarget(gameBoard,D.getTargetCost(),D.getIndexI(),D.getIndexJ(),A,B,C);
-        } else if(D.getGold() > 0 && D.getFlag()){
-            D.movement(gameBoard,A,B,C);
-        } else {
-            System.out.println("D oyuncusu elendi.");
-        }
-
-        /*A.log(A);
-        B.log(B);
-        C.log(C);
-        D.log(D);*/
-
-        updateGameBoard();
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if(!playerGoldChecker(param, A.getGold(),B.getGold(),C.getGold(),D.getGold())){
+        if (!playerGoldChecker(param, A.getGold(), B.getGold(), C.getGold(), D.getGold())) {
+            System.out.println("----------------------");
             alert.setTitle("Oyun Sonu");
             alert.setHeaderText(null);
             alert.setContentText("Tüm oyuncuların altını bittiği için oyun sona erdi!");
             alert.showAndWait();
-        } else if(!tableGoldChecker(param)){
+        } else if (!tableGoldChecker(param)) {
+            System.out.println("----------------------");
+
+            for (int i = 0; i < m; i++) {
+
+                for (int j = 0; j < n; j++) {
+                    System.out.print(gameBoard[i][j] + " ");
+                }
+                System.out.println();
+            }
+
             alert.setTitle("Oyun Sonu");
             alert.setHeaderText(null);
             alert.setContentText("Oyun tahtasındaki altınlar bittiği için oyun sona erdi!");
             alert.showAndWait();
+        } else {
+
+            //Oyuncunun flagi false ise hedef sectir,true ise hareket ettir.Oyuncu hedefe ulasirsa flagi false yap.
+            //A
+            if (!A.getFlag() && A.getGold() > 0) {
+                A.selectTarget(gameBoard, A.getTargetCost(), A.getIndexI(), A.getIndexJ());
+            } else if (A.getGold() > 0 && A.getFlag()) {
+                A.movement(gameBoard, B, C, D);
+            } else {
+                System.out.println("A oyuncusu elendi.");
+            }
+            //B
+            if (!B.getFlag() && B.getGold() > 0) {
+                B.selectTarget(gameBoard, B.getTargetCost(), B.getIndexI(), B.getIndexJ());
+            } else if (B.getGold() > 0 && B.getFlag()) {
+                B.movement(gameBoard, A, C, D);
+            } else {
+                System.out.println("B oyuncusu elendi.");
+            }
+            //C
+            if (!C.getFlag() && C.getGold() > 0) {
+                C.selectTarget(gameBoard, C.getTargetCost(), C.getIndexI(), C.getIndexJ());
+            } else if (C.getGold() > 0 && C.getFlag()) {
+                C.movement(gameBoard, A, B, D);
+            } else {
+                System.out.println("C oyuncusu elendi.");
+            }
+            //D
+            if (!D.getFlag() && D.getGold() > 0) {
+                D.selectTarget(gameBoard, D.getTargetCost(), D.getIndexI(), D.getIndexJ(), A, B, C);
+            } else if (D.getGold() > 0 && D.getFlag()) {
+                D.movement(gameBoard, A, B, C);
+            } else {
+                System.out.println("D oyuncusu elendi.");
+            }
+
+            A.log(A);
+            B.log(B);
+            C.log(C);
+            D.log(D);
+
+            updateGameBoard();
+
         }
+
 
     }
 }

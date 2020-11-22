@@ -45,7 +45,7 @@ public class B extends Players{
 
         for (int i=0;i<matrixM;i++){
             for(int j=0;j<matrixN;j++){
-                if(matrix[i][j] != 1 && matrix[i][j]!=50){
+                if(matrix[i][j] != 1 && matrix[i][j] != 50){
                     tempProfit = (matrix[i][j]-(Math.ceil(calcDistance(playerI,playerJ,i,j)/this.steps))*this.moveCost-this.targetCost);
                     if(tempProfit > totalProfit){
                         totalProfit = tempProfit;
@@ -77,7 +77,7 @@ public class B extends Players{
     @Override
     public void log(Players player) {
         //logB.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
-        System.out.println(player.logFile.getName()+" dosyasına yazılıyor...");
+
         try {
             writer = new FileWriter("src/sample/Logs/logB.txt",true);
             writer.write("\nB Oyuncusu\n\n");
@@ -85,10 +85,10 @@ public class B extends Players{
                     +" \nToplam Atılan Adım Sayısı : "+player.stepsCount);
             writer.write("\n\n----\n");
             writer.close();
-            System.out.println("Yazma işlemi tamamlandı!");
+
         }
         catch (Exception e) {
-            System.out.println("Bir sorun meydana geldi.");
+            System.out.println("logB.txt dosyasına yazma işlemi sırasında bir sorun meydana geldi.");
             e.printStackTrace();
         }
 
@@ -133,14 +133,14 @@ public class B extends Players{
                 matrix[this.indexI][this.indexJ] = 1;
                 a.flag = false;
 
-            } else if(this.indexI == c.targetI && this.indexJ == c.targetJ){
+            } if(this.indexI == c.targetI && this.indexJ == c.targetJ){
 
                 System.out.println("B oyuncusu,C oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
                 c.flag = false;
 
-            } else if(this.indexI == d.targetI && this.indexJ == d.targetJ){
+            } if(this.indexI == d.targetI && this.indexJ == d.targetJ){
 
                 System.out.println("B oyuncusu,D oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
@@ -149,10 +149,14 @@ public class B extends Players{
 
             }
 
-            if(this.indexI == targetI && this.indexJ == this.targetJ){
+            if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] != 1){
                 System.out.println("B oyuncusu hedefine ulaştı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            } else if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] == 1){
+
                 this.flag = false;
                 break;
             }

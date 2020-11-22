@@ -101,12 +101,13 @@ public class D extends Players {
 
                 for(int j=0;j<matrixN;j++){
 
-                    if(matrix[i][j] != 1 && matrix[i][j]!=50){
+                    if(matrix[i][j] != 1 && matrix[i][j] != 50){
 
                         tempProfit = (matrix[i][j]-(Math.ceil(calcDistance(playerI,playerJ,i,j)/this.steps))*this.moveCost-this.targetCost);
 
                         if(tempProfit > totalProfit &&
-                                (i != a.targetI && i != b.targetI && i != c.targetI && j != a.targetJ && j != b.targetJ && j != c.targetJ)){
+                                ((i != a.targetI && j != a.targetJ ) && (i != b.targetI && j != b.targetJ) &&
+                                (i != c.targetI && j != c.targetJ))){
 
                             totalProfit = tempProfit;
                             tempDist = calcDistance(playerI,playerJ,i,j);
@@ -131,8 +132,8 @@ public class D extends Players {
         this.targetJ = tempJ;
         this.targetDist = (int) Math.ceil(tempDist / this.steps);
 
-        this.gold -= targetCost;
-        this.goldSpent += targetCost;
+        this.gold -= this.targetCost;
+        this.goldSpent += this.targetCost;
         this.flag = true;
 
         setStepsRemaining();
@@ -141,7 +142,7 @@ public class D extends Players {
     @Override
     public void log(Players player) {
         //logD.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
-        System.out.println(player.logFile.getName() + " dosyasına yazılıyor...");
+
         try {
             writer = new FileWriter("src/sample/Logs/logD.txt", true);
             writer.write("\nD Oyuncusu\n\n");
@@ -149,9 +150,9 @@ public class D extends Players {
                     + " \nToplam Atılan Adım Sayısı : " + player.stepsCount);
             writer.write("\n----\n");
             writer.close();
-            System.out.println("Yazma işlemi tamamlandı!");
+
         } catch (Exception e) {
-            System.out.println("Bir sorun meydana geldi.");
+            System.out.println("logD.txt dosyasına yazma işlemi sırasında bir sorun meydana geldi.");
             e.printStackTrace();
         }
 
@@ -196,14 +197,14 @@ public class D extends Players {
                 matrix[this.indexI][this.indexJ] = 1;
                 b.flag = false;
 
-            } else if(this.indexI == c.targetI && this.indexJ == c.targetJ){
+            }  if(this.indexI == c.targetI && this.indexJ == c.targetJ){
                 //Stealing from c
                 System.out.println("D oyuncusu,C oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
                 c.flag = false;
 
-            } else if(this.indexI == a.targetI && this.indexJ == a.targetJ){
+            }  if(this.indexI == a.targetI && this.indexJ == a.targetJ){
                 //Stealing from a
                 System.out.println("D oyuncusu,A oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
@@ -212,10 +213,14 @@ public class D extends Players {
 
             }
 
-            if(this.indexI == targetI && this.indexJ == this.targetJ){
-                System.out.println("A oyuncusu hedefine ulaştı.");
+            if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] != 1){
+                System.out.println("D oyuncusu hedefine ulaştı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            } else if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] == 1){
+
                 this.flag = false;
                 break;
             }

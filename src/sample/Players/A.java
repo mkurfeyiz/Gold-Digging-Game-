@@ -79,7 +79,6 @@ public class A extends Players {
     @Override
     public void log(Players player) {
         //logA.txt dosyasi olustur ve icine hamle bilgilerini yazdir.
-        System.out.println(player.logFile.getName() + " dosyasına yazılıyor...");
         try {
             writer = new FileWriter("src/sample/Logs/logA.txt", true);
             writer.write("\nA Oyuncusu\n\n");
@@ -87,9 +86,8 @@ public class A extends Players {
                     + " \nToplam Atılan Adım Sayısı : " + player.stepsCount);
             writer.write("\n----\n");
             writer.close();
-            System.out.println("Yazma işlemi tamamlandı!");
         } catch (Exception e) {
-            System.out.println("Bir sorun meydana geldi.");
+            System.out.println("logA.txt dosyasına yazma işlemi sırasında bir sorun meydana geldi.");
             e.printStackTrace();
         }
 
@@ -133,14 +131,14 @@ public class A extends Players {
                 matrix[this.indexI][this.indexJ] = 1;
                 b.flag = false;
 
-            } else if(this.indexI == c.targetI && this.indexJ == c.targetJ){
+            } if(this.indexI == c.targetI && this.indexJ == c.targetJ){
 
                 System.out.println("A oyuncusu,C oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
                 c.flag = false;
 
-            } else if(this.indexI == d.targetI && this.indexJ == d.targetJ){
+            } if(this.indexI == d.targetI && this.indexJ == d.targetJ){
 
                 System.out.println("A oyuncusu,D oyuncusunun hedeflediği altını aldı.");
                 this.gold += matrix[this.indexI][this.indexJ];
@@ -149,10 +147,14 @@ public class A extends Players {
 
             }
 
-            if(this.indexI == targetI && this.indexJ == this.targetJ){
+            if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] != 1){
                 System.out.println("A oyuncusu hedefine ulaştı.");
                 this.gold += matrix[this.indexI][this.indexJ];
                 matrix[this.indexI][this.indexJ] = 1;
+                this.flag = false;
+                break;
+            } else if(this.indexI == targetI && this.indexJ == this.targetJ && matrix[this.indexI][this.indexJ] == 1){
+
                 this.flag = false;
                 break;
             }
